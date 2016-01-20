@@ -1,0 +1,75 @@
+package com.example.ethan.bmicalculator;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
+
+
+public class MainActivity extends Activity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            Button male = (Button)this.findViewById(R.id.male_btn);
+            male.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    TextView resp = (TextView) findViewById(R.id.response);
+                    EditText heightInput = (EditText) findViewById(R.id.height);
+                    EditText weightInput = (EditText) findViewById(R.id.weight);
+                    EditText ageInput = (EditText) findViewById(R.id.age);
+
+                    String heightString = heightInput.getText().toString();
+                    double height = Double.parseDouble(heightString) * 0.0254;
+                    String weightString = weightInput.getText().toString();
+                    double weight = Double.parseDouble(weightString) * 0.45359237;
+                    String ageString = ageInput.getText().toString();
+                    double age = Double.parseDouble(ageString);
+
+                    double BMI = (weight / (height * height));
+                    double BF = ((BMI * 1.20) + (0.23 * age) - 10.8 - 5.4);
+
+                    DecimalFormat doubleRounder = new DecimalFormat("0.0000");
+                    String totals = "Height in meters: " + doubleRounder.format(height) +
+                            "\nWeight in kilograms: " + doubleRounder.format(weight) +
+                            "\nBMI: " + doubleRounder.format(BMI) +
+                            "\nBody Fat Percentage: " + doubleRounder.format(BF);
+                    resp.setText(totals);
+                }
+            });
+            Button female = (Button)this.findViewById(R.id.female_btn);
+            female.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    TextView resp = (TextView) findViewById(R.id.response);
+                    EditText heightInput = (EditText) findViewById(R.id.height);
+                    EditText weightInput = (EditText) findViewById(R.id.weight);
+                    EditText ageInput = (EditText) findViewById(R.id.age);
+
+                    String heightString = heightInput.getText().toString();
+                    double height = Double.parseDouble(heightString) * 0.0254;
+                    String weightString = weightInput.getText().toString();
+                    double weight = Double.parseDouble(weightString) * 0.45359237;
+                    String ageString = ageInput.getText().toString();
+                    double age = Double.parseDouble(ageString);
+
+                    double BMI = (weight / (height * height));
+                    double BF = ((BMI * 1.20) + (0.23 * age)  - 5.4);
+
+                    DecimalFormat doubleRounder = new DecimalFormat("0.0000");
+                    String totals = "Height in meters: " + doubleRounder.format(height) +
+                            "\nWeight in kilograms: " + doubleRounder.format(weight) +
+                            "\nBMI: " + doubleRounder.format(BMI) +
+                            "\nBody Fat Percentage: " + doubleRounder.format(BF);
+                    resp.setText(totals);
+                }
+            });
+        }
+    }
